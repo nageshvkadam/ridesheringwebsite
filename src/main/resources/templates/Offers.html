@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SufferNow — Offers</title>
+
+  <style>
+    :root{
+      --bg:#0b0c10;
+      --card:#121317;
+      --muted:#8b92a6;
+      --text:#f2f5f9;
+      --brand:#00d37f;
+      --brand-2:#ffd54a;
+      --radius:16px;
+      --soft-shadow:0 10px 30px rgba(0,0,0,.35);
+    }
+    body{
+      margin:0; background:var(--bg); color:var(--text);
+      font-family:Inter, sans-serif;
+    }
+    .nav{
+      padding:14px 20px; background:#0b0c10;
+      border-bottom:1px solid rgba(255,255,255,.07);
+      display:flex; justify-content:space-between; align-items:center;
+      position:sticky; top:0;
+    }
+    .nav a{color:#dce3ee; text-decoration:none; font-weight:600}
+    .offers{max-width:900px; margin:30px auto; padding:20px}
+    .offer-card{
+      background:var(--card); padding:20px;
+      border-radius:var(--radius); margin-bottom:20px;
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:var(--soft-shadow);
+    }
+    .tag{
+      display:inline-block; background:var(--brand);
+      padding:6px 12px; border-radius:12px; color:#052e1f;
+      font-weight:700; margin-bottom:10px;
+    }
+    h2{margin-bottom:20px}
+  </style>
+</head>
+<body>
+
+  <div class="nav">
+    <a href="index.html">⬅ Back to Home</a>
+    <strong>SufferNow – Offers</strong>
+  </div>
+
+  <div class="offers">
+
+    <h2>Available Offers</h2>
+
+    <div class="offer-card">
+      <div class="tag">100% Cashback</div>
+      <h3>First Ticket Money Back Offer</h3>
+      <p>Book your first ride and get full amount back in your SufferNow wallet.</p>
+      <ul>
+        <li>Valid for new users only</li>
+        <li>Cashback credited instantly</li>
+        <li>No coupon required</li>
+        <li>Applicable in all cities</li>
+      </ul>
+    </div>
+
+    <div class="offer-card">
+      <div class="tag" style="background:var(--brand-2); color:#000;">₹50 OFF</div>
+      <h3>Flat ₹50 Off on 3 Rides</h3>
+      <p>Book any 3 rides this week & get ₹50 off instantly.</p>
+    </div>
+
+  </div>
+
+</body>
+</html>

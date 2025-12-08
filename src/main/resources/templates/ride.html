@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SufferNow — Book Cabs, Autos, Outstation & Rentals</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:#0b0c10;
+      --card:#121317;
+      --muted:#8b92a6;
+      --text:#f2f5f9;
+      --brand:#00d37f;
+      --brand-2:#ffd54a;
+      --danger:#ff5c5c;
+      --ring:0 0 0 3px rgba(0,211,127,.25);
+      --radius:16px;
+      --soft-shadow:0 10px 30px rgba(0,0,0,.35);
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; margin:0; font-family: Inter, system-ui; line-height:1.5; color: var(--text); background: var(--bg); }
+    a { color:inherit; text-decoration:none; }
+    img { max-width:100%; display:block; }
+
+    .nav { position: sticky; top:0; z-index:50; backdrop-filter: saturate(1.1) blur(8px); background: rgba(11,12,16,.6); border-bottom:1px solid rgba(255,255,255,.06); }
+    .nav-inner { max-width:1200px; margin:0 auto; padding:14px 20px; display:flex; align-items:center; gap:18px; }
+    .brand { display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.2px; }
+    .nav-links { margin-left:auto; display:flex; gap:18px; align-items:center; }
+    .nav-links a { font-weight:600; color:#dce3ee; opacity:.9; }
+    .nav-links a:hover { opacity:1; }
+    .btn { display:inline-flex; align-items:center; gap:8px; font-weight:700; padding:10px 16px; border-radius:999px; background:#1a1d24; border:1px solid rgba(255,255,255,.08); cursor:pointer; }
+    .btn-accent { background: linear-gradient(135deg, var(--brand), #16c175); color:#052e1f; }
+
+    .hero { max-width:1200px; margin:40px auto; padding:0 20px; }
+    .card { background:var(--card); padding:18px; border-radius: var(--radius); box-shadow: var(--soft-shadow); }
+    .fields { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .field { position:relative; }
+    .field input, .field select { width:100%; padding:14px 14px 14px 42px; border-radius:12px; background:#0f1116; border:1px solid rgba(255,255,255,.10); color:#e8eef9; outline:none; }
+    .field input:focus, .field select:focus { box-shadow:var(--ring); border-color:#29e19b; }
+    .icon { position:absolute; left:12px; top:50%; transform:translateY(-50%); opacity:.9; }
+
+    .submit { grid-column: span 2; margin-top:12px; display:flex; gap:12px; }
+    .submit .btn { flex:1; justify-content:center; }
+
+    footer { margin-top:36px; border-top:1px solid rgba(255,255,255,.08); padding:22px 20px; text-align:center; color:#a8b1c6; font-size:13px; }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="#">SufferNow</a>
+      <nav class="nav-links">
+        <a href="#rides">Rides</a>
+        <a href="#rentals">Rentals</a>
+        <a href="#offers">Offers</a>
+        <a href="#outstation">Outstation</a>
+        <a href="#safety">Safety</a>
+        <a class="btn btn-accent" href="/login">Login</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Booking Form -->
+  <section class="hero">
+    <div class="card">
+      <form action="/bookRide" method="post" class="fields">
+        <div class="field" style="grid-column: span 2;">
+          <span class="icon">📍</span>
+          <input type="text" name="pickupLocation" placeholder="Pickup Location" required>
+        </div>
+        <div class="field" style="grid-column: span 2;">
+          <span class="icon">🎯</span>
+          <input type="text" name="dropLocation" placeholder="Drop Location" required>
+        </div>
+        <div class="field">
+          <span class="icon">🗓️</span>
+          <input type="date" name="rideDate" required>
+        </div>
+        <div class="field">
+          <span class="icon">⏰</span>
+          <input type="time" name="rideTime" required>
+        </div>
+        <div class="field">
+          <span class="icon">🚕</span>
+          <select name="cabType" required>
+            <option value="Auto">Auto</option>
+            <option value="Mini">Mini</option>
+            <option value="Sedan">Sedan</option>
+            <option value="SUV">SUV</option>
+            <option value="Lux">Lux</option>
+          </select>
+        </div>
+        <div class="field">
+          <span class="icon">👤</span>
+          <input type="number" name="passengers" min="1" max="5" value="1" required>
+        </div>
+        <div class="submit">
+          <button type="submit" class="btn btn-accent">Book Ride</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    © <span id="year"></span> SufferNow. All rights reserved.
+  </footer>
+
+  <script>
+    document.getElementById('year').textC

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Select Your Ride</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: #000;
+      color: #fff;
+      padding: 15px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .car-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 30px;
+    }
+
+    .car-card {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      text-align: center;
+      padding: 20px;
+      transition: transform 0.3s;
+      cursor: pointer;
+    }
+
+    .car-card:hover {
+      transform: scale(1.05);
+      border: 2px solid #000;
+    }
+
+    .car-card img {
+      width: 100%;
+      height: 150px;
+      object-fit: contain;
+      margin-bottom: 15px;
+    }
+
+    .car-card h3 {
+      margin: 10px 0;
+      font-size: 20px;
+    }
+
+    .car-card p {
+      font-size: 14px;
+      color: #555;
+    }
+
+    .select-btn {
+      margin-top: 15px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      background: black;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .select-btn:hover {
+      background: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <header>🚗 Select Your Ride</header>
+
+  <div class="car-container">
+    <div class="car-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/743/743007.png" alt="Mini">
+      <h3>Mini</h3>
+      <p>Affordable AC hatchbacks for short trips</p>
+      <button class="select-btn">Select</button>
+    </div>
+
+    <div class="car-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/743/743131.png" alt="Sedan">
+      <h3>Sedan</h3>
+      <p>Comfortable sedans for city & outstation rides</p>
+      <button class="select-btn">Select</button>
+    </div>
+
+    <div class="car-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/743/743131.png" alt="SUV">
+      <h3>SUV</h3>
+      <p>Spacious SUVs for family or group rides</p>
+      <button class="select-btn">Select</button>
+    </div>
+
+    <div class="car-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/3097/3097144.png" alt="Auto">
+      <h3>Auto</h3>
+      <p>Budget-friendly auto rides within the city</p>
+      <button class="select-btn">Select</button>
+    </div>
+
+    <div class="car-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/743/743276.png" alt="Luxury">
+      <h3>Luxury</h3>
+      <p>Premium cars for special rides</p>
+      <button class="select-btn">Select</button>
+    </div>
+  </div>
+
+</body>
+</html>

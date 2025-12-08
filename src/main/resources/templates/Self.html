@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SufferNow -Car Rental</title>
+<style>
+  :root{
+    --black:#0f172a;--gray:#f4f6f8;--primary:#0ea5e9;--primary-dark:#0284c7;--text:#0b1220;
+    --muted:#6b7280;--card:#ffffff;--accent:#22c55e;--danger:#ef4444;
+    --radius:14px;--shadow:0 10px 25px rgba(2,6,23,.08);
+  }
+  *{box-sizing:border-box}html,body{margin:0}
+  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;background:#fff;color:var(--text)}
+
+  /* Navbar */
+  .nav{position:sticky;top:0;background:#fff;border-bottom:1px solid #e5e7eb;z-index:50}
+  .nav .wrap{max-width:1200px;margin:auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px;color:var(--black);text-decoration:none}
+  .brand .dot{width:10px;height:10px;border-radius:50%;background:var(--primary)}
+  .nav a{color:#111827;text-decoration:none;font-weight:600}
+  .nav .links{display:flex;gap:20px;align-items:center}
+  .btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 18px;border-radius:10px;border:1px solid #e5e7eb;background:#fff;font-weight:700;cursor:pointer;transition:.2s}
+  .btn:hover{transform:translateY(-1px)}
+  .btn-primary{background:var(--black);color:#fff;border-color:var(--black)}
+  .btn-outline{background:#fff;color:var(--black)}
+  .hide-m{display:none}
+  @media(min-width:900px){.hide-d{display:none}.hide-m{display:inline-flex}}
+
+  /* Hero */
+  .hero{background:linear-gradient(180deg,#eaf6ff,transparent 60%),url('https://images.unsplash.com/photo-1518005068251-37900150dfca?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;min-height:64vh}
+  .hero .wrap{max-width:1200px;margin:auto;padding:40px 20px;display:grid;grid-template-columns:1.2fr .8fr;gap:26px}
+  @media(max-width:900px){.hero .wrap{grid-template-columns:1fr}}
+  .hero h1{font-size:40px;line-height:1.1;margin:10px 0 14px}
+  .hero p{color:var(--muted);margin:0 0 22px}
+  .search{background:var(--card);padding:16px;border-radius:16px;box-shadow:var(--shadow);display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+  @media(max-width:900px){.search{grid-template-columns:1fr 1fr}}
+  .field{display:flex;flex-direction:column;gap:6px}
+  .label{font-size:12px;color:#6b7280;font-weight:700;letter-spacing:.03em;text-transform:uppercase}
+  .input{height:48px;border:1px solid #e5e7eb;border-radius:10px;padding:0 12px;font-weight:600}
+  .search .btn-primary{height:48px}
+
+  /* Section generic */
+  .section{max-width:1200px;margin:auto;padding:42px 20px}
+  .section h2{font-size:28px;margin:0 0 14px}
+  .muted{color:var(--muted)}
+  .grid{display:grid;gap:18px}
+  .grid-3{grid-template-columns:repeat(3,1fr)}
+  .grid-4{grid-template-columns:repeat(4,1fr)}
+  @media(max-width:1100px){.grid-4{grid-template-columns:repeat(3,1fr)}}
+  @media(max-width:900px){.grid-3,.grid-4{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:600px){.grid-3,.grid-4{grid-template-columns:1fr}}
+
+  /* Cards */
+  .card{background:var(--card);border:1px solid #eef2f6;border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+  .card .img{aspect-ratio:16/10;background:#e5e7eb}
+  .card .img img{width:100%;height:100%;object-fit:cover;display:block}
+  .card .body{padding:16px}
+  .row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .pill{display:inline-flex;align-items:center;gap:6px;background:#f1f5f9;border:1px solid #e2e8f0;color:#0f172a;padding:6px 10px;border-radius:999px;font-weight:700;font-size:12px}
+  .price{font-size:20px;font-weight:900}
+  .small{font-size:12px;color:var(--muted)}
+  .features{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+  .features span{background:#f9fafb;border:1px solid #eef2f6;padding:6px 10px;border-radius:999px;font-size:12px}
+  .card .actions{padding:14px 16px;display:flex;gap:10px;border-top:1px dashed #e5e7eb}
+  .btn-green{background:var(--accent);color:#072b12;border-color:var(--accent)}
+  .btn-danger{background:var(--danger);color:#fff;border-color:var(--danger)}
+
+  /* CTA strip */
+  .strip{background:var(--gray);border-top:1px solid #e5e7eb;border-bottom:1px solid #e5e7eb}
+  .strip .inner{max-width:1200px;margin:auto;padding:18px 20px;display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+  .strip .mini{display:flex;align-items:center;gap:10px}
+
+  /* Booking form */
+  .booking{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .booking .box{background:#fff;border:1px solid #e5e7eb;border-radius:16px;box-shadow:var(--shadow);padding:20px}
+  .booking .box h3{margin:0 0 12px}
+  .booking .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:900px){.booking{grid-template-columns:1fr}}
+
+  /* Testimonials */
+  .testi{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  @media(max-width:900px){.testi{grid-template-columns:1fr 1fr}}
+  @media(max-width:600px){.testi{grid-template-columns:1fr}}
+  .quote{padding:18px;border-radius:16px;border:1px solid #e5e7eb;background:#fff;box-shadow:var(--shadow)}
+  .quote .who{display:flex;align-items:center;gap:10px;margin-top:10px}
+  .avatar{width:38px;height:38px;border-radius:50%;background:#e5e7eb}
+
+  /* FAQ */
+  details{border:1px solid #e5e7eb;border-radius:12px;padding:14px 16px;background:#fff}
+  details+details{margin-top:10px}
+  summary{cursor:pointer;font-weight:800}
+  details p{margin:10px 0 0;color:var(--muted)}
+
+  /* Footer */
+  .footer{background:#0b1220;color:#cbd5e1;margin-top:40px}
+  .footer .wrap{max-width:1200px;margin:auto;padding:40px 20px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:22px}
+  .footer h4{color:#fff;margin:0 0 10px}
+  .footer a{display:block;color:#9aa6b2;margin:6px 0;text-decoration:none}
+  .sub{border-top:1px solid #1f2937;padding:16px 20px;text-align:center;color:#94a3b8}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="nav">
+  <div class="wrap">
+    <a class="brand" href="#"><span class="dot"></span>Self-Driver</a>
+    <div class="links hide-m">
+      <a href="/Cars">Cars</a>
+      <a href="#pricing">Pricing</a>
+      <a href="/Help">How it works</a>
+      <a href="/Help">FAQ</a>
+    </div>
+    <div class="links">
+      <a class="btn btn-outline hide-m" href="/login">Log in</a>
+	  <a class="btn btn-outline hide-m" href="/register">New User</a>
+
+
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <h1>Self-Drive Bike Rentals in Your City</h1>
+      <p>Pickup in minutes. Hourly, daily or weekly plans. Zero deposit options available.</p>
+      <form class="search" id="search">
+        <div class="field">
+          <label class="label">City</label>
+          <input class="input" placeholder="e.g. Bengaluru" />
+        </div>
+        <div class="field">
+          <label class="label">Pickup</label>
+          <input type="datetime-local" class="input" />
+        </div>
+        <div class="field">
+          <label class="label">Dropoff</label>
+          <input type="datetime-local" class="input" />
+        </div>
+        <button class="btn  btn btn-primary" type="button"> Car</button>
+      </form>
+      <p class="small" style="margin-top:10px">Documents required: Driving license • Aadhar/Passport</p>
+    </div>
+    <div></div>
+  </div>
+</header>
+
+<!-- QUICK STRIP -->
+<div class="strip">
+  <div class="inner">
+    <div class="mini"><strong>✓ Instant confirmation</strong></div>
+    <div class="mini"><strong>✓ Helmet included</strong></div>
+    <div class="mini"><strong>✓ Doorstep delivery*</strong></div>
+    <div class="mini"><strong>✓ 24×7 support</strong></div>
+  </div>
+</div>
+
+<!-- BIKE LISTINGS -->
+<section id="bikes" class="section">
+  <h2>Popular Cars</h2>
+  <p class="muted">Choose from scooters to premium Cars.</p>
+  <div class="grid grid-3" style="margin-top:14px">
+    <!-- card 1 -->
+    <article class="card">
+      <div class="img"><img src="https://images.unsplash.com/photo-1542367597-8849eb47d183?q=80&w=1200&auto=format&fit=crop" alt="Honda Activa"></div>
+      <div class="body">
+        <div class="row">
+          <strong>Swift</strong>
+          <span class="pill">Scooter</span>
+        </div>
+        <div class="row" style="margin-top:8px">
+          <div class="price">₹3499 <span class="small">/ day</span></div>
+          <div class="small">km limit: 1200</div>
+        </div>
+        <div class="features">
+          <span>Driving linces </span><span>Free km</span><span>Home delivery</span>
+        </div>
+      </div>
+      <div class="actions">
+        <a class="btn btn-outline" href="#details">Details</a>
+        <a class="btn btn-green" href="#book">Book</a>
+      </div>
+    </article>
+
+    <!-- card 2 -->
+    <article class="card">
+      <div class="img"><img src="https://images.unsplash.com/photo-1517524206127-48bbd363f3c7?q=80&w=1200&auto=format&fit=crop" alt="Royal Enfield Classic 350"></div>
+      <div class="body">
+        <div class="row">
+          <strong>Ertiga</strong>
+          <span class="pill">Cruiser</span>
+        </div>
+        <div class="row" style="margin-top:8px">
+          <div class="price">₹8999 <span class="small">/ day</span></div>
+          <div class="small">km limit: 2000</div>
+        </div>
+        <div class="features">
+			<span>Driving linces </span><span>Free km</span><span>Home delivery*</span>
+        </div>
+      </div>
+      <div class="actions">
+        <a class="btn btn-outline" href="#details">Details</a>
+        <a class="btn btn-green" href="#book">Book</a>
+      </div>
+    </article>
+
+    <!-- card 3 -->
+    <article class="card">
+      <div class="img"><img src="https://images.unsplash.com/photo-1517867065801-f364c54b1fb4?q=80&w=1200&auto=format&fit=crop" alt="Yamaha MT15"></div>
+      <div class="body">
+        <div class="row">
+          <strong>Innnova</strong>
+          <span class="pill">Street</span>
+        </div>
+        <div class="row" style="margin-top:8px">
+          <div class="price">₹9499 <span class="small">/ day</span></div>
+          <div class="small">km limit: 1800</div>
+        </div>
+        <div class="features">
+			<span>Driving linces </span><span>Free km</span><span>Home delivery*</span>
+        </div>
+      </div>
+      <div class="actions">
+        <a class="btn btn-outline" href="#details">Details</a>
+        <a class="btn btn-green" href="#book">Book</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" class="section" style="background:#fafafa;border-top:1px solid #e5e7eb;border-bottom:1px solid #e5e7eb">
+  <h2>Simple Pricing</h2>
+  <p class="muted">Transparent plans for every need.</p>
+  <div class="grid grid-3" style="margin-top:14px">
+    <div class="card" style="padding:18px">
+      <h3>Hourly</h3><p class="muted">Best for quick errands</p>
+      <ul class="muted" style="margin:12px 0 18px;line-height:1.9">
+        <li>• From ₹499/ hr</li><li>• 10–15 free km</li><li>• Need Linceses included</li>
+      </ul>
+      <a class="btn btn-primary" href="#book">Choose</a>
+    </div>
+    <div class="card" style="padding:18px;outline:2px solid var(--primary);outline-offset:4px">
+      <h3>Daily</h3><p class="muted">Most popular</p>
+      <ul class="muted" style="margin:12px 0 18px;line-height:1.9">
+        <li>• From ₹299 / day</li><li>• 120–200 free km</li><li>• Doorstep delivery*</li>
+      </ul>
+      <a class="btn btn-primary" href="#book">Choose</a>
+    </div>
+    <div class="card" style="padding:18px">
+      <h3>Weekly</h3><p class="muted">For long trips</p>
+      <ul class="muted" style="margin:12px 0 18px;line-height:1.9">
+        <li>• From ₹1799 / week</li><li>• 800+ free km</li><li>• Roadside assist</li>
+      </ul>
+      <a class="btn btn-primary" href="#book">Choose</a>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING FORM -->
+<section id="book" class="section">
+  <h2>Quick Booking</h2>
+  <p class="muted">Fill in your details and we’ll confirm instantly.</p>
+  <div class="booking" style="margin-top:14px">
+    <div class="box">
+      <h3>Your Details</h3>
+      <div class="row2">
+        <input class="input" placeholder="Full Name" />
+        <input class="input" placeholder="Phone Number" />
+      </div>
+      <div class="row2" style="margin-top:12px">
+        <input class="input" placeholder="Email (optional)" />
+        <input class="input" placeholder="City" />
+      </div>
+    </div>
+    <div class="box">
+      <h3>Trip Details</h3>
+      <div class="row2">
+        <input class="input" type="datetime-local" />
+        <input class="input" type="datetime-local" />
+      </div>
+      <div class="row2" style="margin-top:12px">
+        <input class="input" placeholder="Bike Model (e.g. Activa)" />
+        <input class="input" placeholder="Pickup Type (Store / Doorstep)" />
+      </div>
+      <div class="row" style="margin-top:14px">
+        <button class="btn btn-primary" type="button">Request Booking</button>
+        <span class="small">No payment required now</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how" class="section">
+  <h2>How it works</h2>
+  <div class="grid grid-4" style="margin-top:10px">
+    <div class="card" style="padding:16px"><strong>1) Search</strong><p class="muted">Select city, dates & Cars.</p></div>
+    <div class="card" style="padding:16px"><strong>2) Verify</strong><p class="muted">Upload license & ID.</p></div>
+    <div class="card" style="padding:16px"><strong>3) Pickup</strong><p class="muted">Store or doorstep delivery.</p></div>
+    <div class="card" style="padding:16px"><strong>4) Ride</strong><p class="muted">Enjoy with free km & support.</p></div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section">
+  <h2>Loved by Riders</h2>
+  <div class="testi" style="margin-top:12px">
+    <div class="quote">“Great condition bikes & easy pickup.”<div class="who"><div class="avatar"></div><div><strong>Prakash</strong><div class="small">Bengaluru</div></div></div></div>
+    <div class="quote">“Affordable daily plans. Helmet included.”<div class="who"><div class="avatar"></div><div><strong>Ananya</strong><div class="small">Hyderabad</div></div></div></div>
+    <div class="quote">“Booked in 2 minutes. Will use again!”<div class="who"><div class="avatar"></div><div><strong>Ritesh</strong><div class="small">Pune</div></div></div></div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="section">
+  <h2>FAQ</h2>
+  <details open>
+    <summary>What documents do I need?</summary>
+    <p>Valid driving license and a government ID (Aadhar/Passport). Security deposit may apply per vendor.</p>
+  </details>
+  <details>
+    <summary>Is fuel included?</summary>
+    <p>Fuel is generally not included. Bikes are provided with minimal fuel; please refuel as needed.</p>
+  </details>
+  <details>
+    <summary>What if I exceed free kilometers?</summary>
+    <p>Extra km will be charged per vendor tariff at return.</p>
+  </details>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="wrap">
+    <div>
+      <h3 style="color:#fff;margin:0">RentalRiders</h3>
+      <p class="muted" style="margin:10px 0 0">Affordable self-drive rentals across major cities.</p>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <a href="#">About</a><a href="#">Careers</a><a href="#">Blog</a>
+    </div>
+    <div>
+      <h4>Support</h4>
+      <a href="#">Help Center</a><a href="#">Contact</a><a href="#">Terms</a>
+    </div>
+    <div>
+      <h4>Cities</h4>
+      <a href="#">Bengaluru</a><a href="#">Hyderabad</a><a href="#">Pune</a>
+    </div>
+  </div>
+  <div class="sub">© 2025 SufferNow. All rights reserved.</div>
+</footer>
+
+</body>
+</html>
